@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="forestGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f4033" />
+      <stop offset="100%" stop-color="#12271f" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fae29c" />
+      <stop offset="50%" stop-color="#dfa84a" />
+      <stop offset="100%" stop-color="#b8832a" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#dfa84a" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#dfa84a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="128" height="128" rx="28" fill="url(#forestGrad)" />
+  
+  <!-- Outer Gold Border -->
+  <rect x="5" y="5" width="118" height="118" rx="23" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-opacity="0.85" />
+  
+  <!-- Inner Glow -->
+  <circle cx="64" cy="64" r="48" fill="url(#glow)" />
+
+  <!-- Traditional Feast / Brass Uruli Vessel Icon -->
+  <g transform="translate(64, 62) scale(0.95)">
+    <!-- Top Flame / Diya / Kalash Leaf Aura -->
+    <path d="M0 -34 C4 -26 7 -22 6 -16 C5 -11 -1 -11 -3 -14 C-5 -17 -4 -26 0 -34 Z" fill="url(#goldGrad)" />
+    
+    <!-- Vessel Rim -->
+    <ellipse cx="0" cy="-6" rx="34" ry="7" fill="none" stroke="url(#goldGrad)" stroke-width="3" />
+    <path d="M-38 -6 H38" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round" />
+    
+    <!-- Vessel Body -->
+    <path d="M-33 -4 C-33 24 -18 36 0 36 C18 36 33 24 33 -4 Z" fill="none" stroke="url(#goldGrad)" stroke-width="3.2" />
+    
+    <!-- Vessel Decorative Base Ring -->
+    <path d="M-15 36 C-15 40 -8 42 0 42 C8 42 15 40 15 36" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Side Traditional Handles -->
+    <path d="M-34 4 C-44 4 -44 18 -32 20" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M34 4 C44 4 44 18 32 20" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Center Emblem "SK" -->
+    <text x="0" y="19" font-family="'Cormorant Garamond', 'Georgia', serif" font-size="19" font-weight="700" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="1">SK</text>
+  </g>
+</svg>

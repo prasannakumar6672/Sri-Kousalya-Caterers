@@ -1,0 +1,192 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Sri Kousalya design system.
+ * Warm ivory base, deep forest green brand, antique gold accents.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-cocoa: var(--cocoa);
+  --color-terracotta: var(--terracotta);
+  --color-brand-green-light: #2a5a3b;
+  --color-brand-green: #14452f;
+  --color-brand-green-dark: #0c2e1f;
+  --color-brand-gold-light: #e8cd82;
+  --color-brand-gold: #c5a059;
+  --color-brand-gold-dark: #9a7b42;
+  --color-brand-cream-light: #ffffff;
+  --color-brand-cream: #fdfbf7;
+  --color-brand-cream-dark: #f0ebd8;
+  --color-brand-charcoal: #222825;
+  --font-display: "Playfair Display", "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-telugu: "Ramabhadra", "Noto Sans Telugu", "Manrope", sans-serif;
+  --shadow-soft: 0 18px 45px -28px color-mix(in oklab, var(--forest-deep) 55%, transparent);
+  --shadow-lift: 0 30px 70px -40px color-mix(in oklab, var(--forest-deep) 70%, transparent);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --cream: oklch(0.977 0.011 90);
+  --cream-deep: oklch(0.951 0.017 88);
+  --forest: oklch(0.352 0.055 152);
+  --forest-deep: oklch(0.268 0.045 152);
+  --gold: oklch(0.706 0.098 84);
+  --gold-soft: oklch(0.855 0.055 88);
+  --cocoa: oklch(0.352 0.038 55);
+  --terracotta: oklch(0.588 0.108 42);
+
+  --background: var(--cream);
+  --foreground: oklch(0.25 0.026 90);
+  --card: oklch(0.995 0.006 90);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.995 0.006 90);
+  --popover-foreground: var(--foreground);
+  --primary: var(--forest);
+  --primary-foreground: oklch(0.985 0.012 90);
+  --secondary: var(--cream-deep);
+  --secondary-foreground: var(--forest-deep);
+  --muted: var(--cream-deep);
+  --muted-foreground: oklch(0.5 0.024 80);
+  --accent: var(--gold);
+  --accent-foreground: oklch(0.22 0.03 80);
+  --destructive: oklch(0.55 0.19 27);
+  --destructive-foreground: oklch(0.985 0.012 90);
+  --border: oklch(0.9 0.019 88);
+  --input: oklch(0.885 0.021 88);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--gold) 40%, transparent);
+  }
+}
+
+@utility te {
+  font-family: var(--font-telugu);
+  line-height: 1.7;
+}
+
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility rule-gold {
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--gold) 70%, transparent),
+    transparent
+  );
+  height: 1px;
+}
+
+@utility kalamkari {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in oklab, var(--gold) 30%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
