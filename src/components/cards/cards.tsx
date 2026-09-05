@@ -7,14 +7,25 @@ import type { Dish } from "@/data/menuData";
 import type { Testimonial } from "@/data/testimonialData";
 import { btnGold, btnOutline } from "@/components/common/buttons";
 import { BananaLeafOutline } from "@/components/common/Motif";
+import { OccasionIcon } from "@/components/common/OccasionIcon";
 
 export function OccasionCard({ occasion }: { occasion: Occasion }) {
   return (
-    <article className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-soft">
-      <BananaLeafOutline className="pointer-events-none absolute -right-6 -top-6 w-24 text-gold/25" />
-      <h3 className="font-display text-xl text-foreground">{occasion.title}</h3>
-      <p className="te mt-1 text-sm text-gold">{occasion.te}</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{occasion.description}</p>
+    <article className="group relative h-full flex flex-col items-center text-center overflow-hidden rounded-2xl border border-border/80 bg-card p-6 transition-all duration-300 hover:border-gold hover:shadow-soft hover:-translate-y-1">
+      <BananaLeafOutline className="pointer-events-none absolute -right-6 -top-6 w-24 text-gold/20 transition-opacity duration-300 group-hover:text-gold/35" />
+
+      {/* Handcrafted Golden Illustrated Occasion Icon Container */}
+      <div className="mx-auto size-20 rounded-2xl bg-gradient-to-b from-[#f9f3e5] to-[#f4ebd6] dark:from-gold/20 dark:to-gold/5 border border-gold/30 text-gold-dark dark:text-gold flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:border-gold group-hover:shadow-md">
+        <OccasionIcon name={occasion.id} className="size-11" />
+      </div>
+
+      <h3 className="font-display text-xl font-bold text-foreground transition-colors duration-200 group-hover:text-gold-dark dark:group-hover:text-gold">
+        {occasion.title}
+      </h3>
+      <p className="te mt-1 text-sm font-medium text-gold">{occasion.te}</p>
+      <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+        {occasion.description}
+      </p>
     </article>
   );
 }
