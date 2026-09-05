@@ -4,6 +4,7 @@ import biryani from "@/assets/dish-biryani.jpg";
 import pappu from "@/assets/dish-pappu.jpg";
 import bobbatlu from "@/assets/dish-bobbatlu.jpg";
 import payasam from "@/assets/dish-payasam.jpg";
+import pesarattu from "@/assets/dish-pesarattu.jpg";
 
 export type Dish = {
   name: string;
@@ -230,6 +231,7 @@ export const dishes: Dish[] = [
     te: "పెసరట్టు",
     description: "Green gram dosa with ginger chutney and upma.",
     veg: true,
+    image: pesarattu,
     category: "special",
     signature: true,
   },

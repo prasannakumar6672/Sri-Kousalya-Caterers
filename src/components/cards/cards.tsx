@@ -19,42 +19,84 @@ export function OccasionCard({ occasion }: { occasion: Occasion }) {
   );
 }
 
-export function FoodCard({ dish, circular = false }: { dish: Dish; circular?: boolean }) {
+export function FoodCard({
+  dish,
+  circular = false,
+  isCenter = false,
+}: {
+  dish: Dish;
+  circular?: boolean;
+  isCenter?: boolean;
+}) {
   return (
     <article
       className={
-        circular ? "text-center" : "h-full overflow-hidden rounded-2xl border border-border bg-card"
+        circular ? "text-center select-none" : "h-full overflow-hidden rounded-2xl border border-border bg-card"
       }
     >
       {dish.image && (
-        <img
-          src={dish.image}
-          alt={dish.name}
-          loading="lazy"
-          width={900}
-          height={900}
+        <div className={circular ? "relative mx-auto aspect-square w-full max-w-[190px]" : undefined}>
+          <img
+            src={dish.image}
+            alt={dish.name}
+            loading="lazy"
+            width={900}
+            height={900}
+            className={
+              circular
+                ? `size-full rounded-full object-cover transition-all duration-500 ease-out ${
+                    isCenter
+                      ? "scale-105 ring-4 ring-gold/90 ring-offset-2 ring-offset-background shadow-xl"
+                      : "scale-95 opacity-85 ring-1 ring-border/50 hover:opacity-100 hover:scale-100 shadow-soft"
+                  }`
+                : "aspect-[4/3] w-full object-cover"
+            }
+          />
+        </div>
+      )}
+      <div className={circular ? "mt-4 px-2 text-center" : "p-4"}>
+        <div
           className={
             circular
-              ? "mx-auto aspect-square w-full max-w-[190px] rounded-full object-cover shadow-soft transition-transform duration-500 hover:scale-[1.03]"
-              : "aspect-[4/3] w-full object-cover"
+              ? "flex items-center justify-center gap-1.5 text-center"
+              : "flex items-start justify-between gap-2"
           }
-        />
-      )}
-      <div className={circular ? "mt-4 px-1" : "p-4"}>
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display text-lg leading-tight text-foreground">{dish.name}</h3>
+        >
+          <h3
+            className={`font-display leading-tight text-foreground transition-all duration-300 ${
+              circular
+                ? isCenter
+                  ? "text-xl font-bold text-foreground"
+                  : "text-lg text-foreground/90"
+                : "text-lg"
+            }`}
+          >
+            {dish.name}
+          </h3>
           <span
             aria-label={dish.veg ? "Vegetarian" : "Non-vegetarian"}
             title={dish.veg ? "Vegetarian" : "Non-vegetarian"}
-            className={`mt-1 grid size-3.5 shrink-0 place-items-center border ${
+            className={`grid size-3.5 shrink-0 place-items-center border ${
               dish.veg ? "border-green-700" : "border-red-700"
-            }`}
+            } ${circular ? "mt-0.5" : "mt-1"}`}
           >
             <span className={`size-1.5 rounded-full ${dish.veg ? "bg-green-700" : "bg-red-700"}`} />
           </span>
         </div>
-        <p className="te mt-0.5 text-sm text-gold">{dish.te}</p>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{dish.description}</p>
+        <p
+          className={`te mt-1 text-sm font-medium text-gold transition-colors duration-300 ${
+            circular ? "text-center" : ""
+          }`}
+        >
+          {dish.te}
+        </p>
+        <p
+          className={`mt-2 text-sm leading-relaxed text-muted-foreground ${
+            circular ? "text-center line-clamp-2" : ""
+          }`}
+        >
+          {dish.description}
+        </p>
         {!circular && (
           <p className="mt-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/80">
             Available on enquiry

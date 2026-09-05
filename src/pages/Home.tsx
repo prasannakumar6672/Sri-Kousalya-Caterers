@@ -1,5 +1,6 @@
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Leaf, Flame, Users, ShieldCheck, MessageCircle } from "lucide-react";
+import { Leaf, Flame, Users, ShieldCheck, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import weddingFeast from "@/assets/wedding-feast.jpg";
 import cookingTeam from "@/assets/cooking-team.jpg";
 import { defaultWaMessage, site, waLink } from "@/data/siteData";
@@ -54,6 +55,73 @@ const steps = [
 ];
 
 export function Home() {
+  const dishesScrollRef = useRef<HTMLDivElement>(null);
+  const [activeDishIndex, setActiveDishIndex] = useState(0);
+
+  const scrollToDish = (index: number) => {
+    const container = dishesScrollRef.current;
+    if (!container) return;
+    const items = container.querySelectorAll<HTMLElement>("[data-dish-card]");
+    const targetItem = items[index];
+    if (targetItem) {
+      const childCenter = targetItem.offsetLeft + targetItem.offsetWidth / 2;
+      const targetScroll = childCenter - container.clientWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: "smooth",
+      });
+      setActiveDishIndex(index);
+    }
+  };
+
+  const scrollDishes = (direction: "left" | "right") => {
+    const newIndex =
+      direction === "left"
+        ? Math.max(0, activeDishIndex - 1)
+        : Math.min(signatureDishes.length - 1, activeDishIndex + 1);
+    scrollToDish(newIndex);
+  };
+
+  useEffect(() => {
+    const container = dishesScrollRef.current;
+    if (!container) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!container) return;
+          const containerCenter = container.scrollLeft + container.clientWidth / 2;
+          const items = container.querySelectorAll<HTMLElement>("[data-dish-card]");
+          let closestIndex = 0;
+          let minDistance = Infinity;
+
+          items.forEach((item, idx) => {
+            const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+            const distance = Math.abs(containerCenter - itemCenter);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestIndex = idx;
+            }
+          });
+
+          setActiveDishIndex(closestIndex);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    handleScroll();
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       {/* HERO */}
@@ -149,16 +217,74 @@ export function Home() {
           title="Signature Andhra Flavours"
           intro="A glimpse of the dishes an Andhra feast is built around. Sample items shown — your final menu is planned with you."
         />
-        <div className="no-scrollbar -mx-4 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:px-0">
-          {signatureDishes.map((dish, i) => (
-            <Reveal
-              key={dish.name}
-              delay={(i % 3) * 70}
-              className="w-[62%] shrink-0 snap-start lg:w-auto"
+        <div className="relative mt-8">
+          {/* Scroll Navigation Buttons for Desktop & Tablet */}
+          <div className="hidden sm:flex items-center justify-end gap-2 mb-3">
+            <button
+              type="button"
+              onClick={() => scrollDishes("left")}
+              aria-label="Previous dishes"
+              className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground transition-all hover:border-gold hover:bg-muted active:scale-95 shadow-sm"
             >
-              <FoodCard dish={dish} circular />
-            </Reveal>
-          ))}
+              <ChevronLeft className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollDishes("right")}
+              aria-label="Next dishes"
+              className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground transition-all hover:border-gold hover:bg-muted active:scale-95 shadow-sm"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
+
+          {/* Horizontal Scroll Carousel */}
+          <div
+            ref={dishesScrollRef}
+            className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-[calc(50%-130px)] py-8 sm:mx-0 sm:gap-8 sm:px-[calc(50%-140px)] md:px-[calc(50%-150px)] scroll-smooth"
+          >
+            {signatureDishes.map((dish, i) => {
+              const isCenter = i === activeDishIndex;
+              return (
+                <div
+                  key={dish.name}
+                  data-dish-card
+                  onClick={() => scrollToDish(i)}
+                  className={`w-[260px] sm:w-[280px] md:w-[300px] shrink-0 snap-center cursor-pointer transition-all duration-500 ease-out ${
+                    isCenter
+                      ? "scale-105 sm:scale-110 z-20"
+                      : "scale-90 sm:scale-95 opacity-75 hover:opacity-100 z-10"
+                  }`}
+                >
+                  <Reveal delay={(i % 3) * 60}>
+                    <FoodCard dish={dish} circular isCenter={isCenter} />
+                  </Reveal>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Indicator Dots */}
+          <div className="mt-2 flex items-center justify-center gap-2">
+            {signatureDishes.map((dish, idx) => (
+              <button
+                key={dish.name}
+                type="button"
+                onClick={() => scrollToDish(idx)}
+                aria-label={`View ${dish.name}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === activeDishIndex
+                    ? "w-7 bg-gold"
+                    : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Mobile Swipe Hint */}
+          <div className="mt-3 flex items-center justify-center gap-1.5 sm:hidden text-xs text-muted-foreground/60">
+            <span>← Swipe or tap to explore flavours →</span>
+          </div>
         </div>
         <div className="mt-10 text-center">
           <Link to="/menu" className={btnPrimary}>
