@@ -190,3 +190,15 @@
 .no-scrollbar {
   scrollbar-width: none;
 }
+
+@keyframes slideProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.animate-slide-progress {
+  animation: slideProgress linear forwards;
+}
