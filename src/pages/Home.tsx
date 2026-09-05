@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Leaf, Flame, Users, ShieldCheck, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { Leaf, Flame, Users, ShieldCheck, MessageCircle, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import weddingFeast from "@/assets/wedding-feast.jpg";
 import cookingTeam from "@/assets/cooking-team.jpg";
 import { defaultWaMessage, site, waLink } from "@/data/siteData";
 import { occasions } from "@/data/occasionData";
+import { homeAboutFeatures } from "@/data/aboutData";
 import { signatureDishes } from "@/data/menuData";
 import { services } from "@/data/serviceData";
 import { packages } from "@/data/packageData";
@@ -82,6 +83,86 @@ export function Home() {
     scrollToDish(newIndex);
   };
 
+  const [activePkg, setActivePkg] = useState(0);
+  const pkgScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToPackage = (index: number) => {
+    setActivePkg(index);
+    const container = pkgScrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>("[data-pkg-card]");
+    const target = cards[index];
+    if (target) {
+      const childCenter = target.offsetLeft + target.offsetWidth / 2;
+      const targetScroll = childCenter - container.clientWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handlePkgScroll = () => {
+    const container = pkgScrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>("[data-pkg-card]");
+    if (!cards.length) return;
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+    cards.forEach((card, idx) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const diff = Math.abs(containerCenter - cardCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = idx;
+      }
+    });
+    if (closestIndex !== activePkg) {
+      setActivePkg(closestIndex);
+    }
+  };
+
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const testimonialScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTestimonial = (index: number) => {
+    setActiveTestimonial(index);
+    const container = testimonialScrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>("[data-testimonial-card]");
+    const target = cards[index];
+    if (target) {
+      const childCenter = target.offsetLeft + target.offsetWidth / 2;
+      const targetScroll = childCenter - container.clientWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleTestimonialScroll = () => {
+    const container = testimonialScrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>("[data-testimonial-card]");
+    if (!cards.length) return;
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+    cards.forEach((card, idx) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const diff = Math.abs(containerCenter - cardCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = idx;
+      }
+    });
+    if (closestIndex !== activeTestimonial) {
+      setActiveTestimonial(closestIndex);
+    }
+  };
+
   useEffect(() => {
     const container = dishesScrollRef.current;
     if (!container) return;
@@ -149,9 +230,9 @@ export function Home() {
           title="Catering For Every Occasion"
           intro="From an intimate house pooja to a thousand-guest wedding, the food is prepared the same way — fresh, traditional and served with care."
         />
-        <ul className="no-scrollbar mt-10 grid grid-cols-1 min-[440px]:grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <ul className="mt-8 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {occasions.map((o, i) => (
-            <Reveal as="li" key={o.title} delay={(i % 4) * 60}>
+            <Reveal as="li" key={o.title} delay={(i % 4) * 60} className="h-full">
               <OccasionCard occasion={o} />
             </Reveal>
           ))}
@@ -159,50 +240,81 @@ export function Home() {
       </section>
 
       {/* ABOUT */}
-      <section className="bg-cream-deep">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      <section className="bg-cream-deep py-12 sm:py-16 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-2 lg:gap-16">
           <Reveal className="order-2 lg:order-1">
-            <p className="te text-sm text-gold">రుచిలో సంప్రదాయం</p>
-            <h2 className="mt-2 font-display text-[1.9rem] leading-tight text-foreground sm:text-4xl">
-              Our Food. Our Tradition.
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-medium text-gold-dark dark:text-gold">
+              <span className="te font-normal">రుచిలో సంప్రదాయం</span>
+              <span className="size-1 rounded-full bg-gold/60" aria-hidden="true" />
+              <span>Authentic Heritage</span>
+            </div>
+
+            <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+              Our Food. <span className="text-gold italic font-serif">Our Tradition.</span>
             </h2>
-            <div className="rule-gold my-5 max-w-[10rem]" />
-            <p className="text-[0.95rem] leading-relaxed text-muted-foreground">
+
+            <div className="rule-gold my-3.5 max-w-[8rem] sm:my-4" />
+
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
               At Sri Kousalya, food is more than a menu. It is part of the celebration — the pappu
-              poured over hot rice, the pachadi at the corner of the leaf, the payasam that closes
+              poured over hot rice, the pachadi at the corner of the leaf, and the payasam that closes
               the meal.
             </p>
-            <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
-              {[
-                "Authentic Andhra preparation, cooked in traditional proportions",
-                "Quality ingredients bought fresh for every function",
-                "Careful hygiene through preparation and serving",
-                "Experienced cooking team and trained serving staff",
-              ].map((l) => (
-                <li key={l} className="flex gap-3">
-                  <span
-                    className="mt-2 size-1.5 shrink-0 rounded-full bg-gold"
-                    aria-hidden="true"
-                  />
-                  <span>{l}</span>
-                </li>
-              ))}
-            </ul>
-            <Link to="/about" className={`${btnOutline} mt-8`}>
-              Discover Our Story
-            </Link>
+
+            {/* Feature Highlights Grid (2x2 on mobile, compact & eliminating excessive page length) */}
+            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-6 sm:gap-3.5">
+              {homeAboutFeatures.map((feat) => {
+                const IconComponent =
+                  feat.iconName === "Flame"
+                    ? Flame
+                    : feat.iconName === "Leaf"
+                    ? Leaf
+                    : feat.iconName === "ShieldCheck"
+                    ? ShieldCheck
+                    : Users;
+
+                return (
+                  <div
+                    key={feat.id}
+                    className="flex flex-col justify-between rounded-xl border border-border/80 bg-card/90 p-3 sm:p-4 transition-all duration-200 hover:border-gold/50 hover:shadow-soft"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold-dark dark:text-gold sm:size-8">
+                        <IconComponent className="size-3.5 sm:size-4" aria-hidden="true" />
+                      </span>
+                      <h3 className="font-semibold text-xs leading-tight text-foreground sm:text-sm">
+                        {feat.title}
+                      </h3>
+                    </div>
+                    <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground sm:text-xs">
+                      {feat.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex items-center gap-4 sm:mt-8">
+              <Link to="/about" className={`${btnOutline} inline-flex items-center gap-2 text-xs sm:text-sm py-2 px-4 sm:py-2.5 sm:px-6`}>
+                <span>Discover Our Story</span>
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
           </Reveal>
+
           <Reveal className="order-1 lg:order-2">
             <div className="relative">
-              <img
-                src={cookingTeam}
-                alt="Sri Kousalya cooks preparing rice in large brass vessels"
-                loading="lazy"
-                width={1408}
-                height={1008}
-                className="w-full rounded-3xl object-cover shadow-lift"
-              />
-              <BrassVessel className="absolute -bottom-5 -left-3 w-16 text-gold/60" />
+              <div className="overflow-hidden rounded-2xl sm:rounded-3xl shadow-lift border border-gold/20">
+                <img
+                  src={cookingTeam}
+                  alt="Sri Kousalya cooks preparing rice in large brass vessels"
+                  loading="lazy"
+                  width={1408}
+                  height={1008}
+                  className="aspect-[16/10] sm:aspect-auto w-full object-cover"
+                />
+              </div>
+              <BrassVessel className="absolute -bottom-4 -left-3 hidden w-16 text-gold/60 sm:block" />
             </div>
           </Reveal>
         </div>
@@ -338,37 +450,86 @@ export function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16 lg:py-24">
         <SectionHeading
           eyebrowTe="మా సేవలు"
           title="What We Take Care Of"
           intro="Cooking only, full catering, or anything in between — tell us how much you'd like handled."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-7 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6">
           {services.slice(0, 4).map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 4) * 60}>
+            <Reveal key={s.slug} delay={(i % 4) * 60} className="h-full">
               <ServiceCard service={s} />
             </Reveal>
           ))}
         </div>
         <div className="mt-8 text-center">
-          <Link to="/services" className={btnOutline}>
-            See All Services
+          <Link to="/services" className={`${btnOutline} inline-flex items-center gap-2 text-xs sm:text-sm`}>
+            <span>See All Services</span>
+            <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
       </section>
 
       {/* PACKAGES */}
-      <section className="bg-cream-deep">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section className="bg-cream-deep py-12 sm:py-16 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading
             eyebrowTe="విందు ప్యాకేజీలు"
             title="Catering Packages"
             intro="Every event is quoted after we understand the guest count, menu and service style — so you only pay for what your celebration needs."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+          {/* Mobile Interactive Tab Bar (< sm screens) */}
+          <div className="mt-7 flex sm:hidden items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4">
+            {packages.map((p, idx) => (
+              <button
+                key={p.name}
+                type="button"
+                onClick={() => scrollToPackage(idx)}
+                className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                  activePkg === idx
+                    ? "bg-forest-deep text-gold shadow-sm font-bold border border-gold/60 scale-[1.02]"
+                    : "bg-card border border-border text-muted-foreground hover:border-gold/40"
+                }`}
+              >
+                {p.featured ? "★ " : ""}{p.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Swipeable Snap Carousel (< sm screens) */}
+          <div
+            ref={pkgScrollRef}
+            onScroll={handlePkgScroll}
+            className="mt-4 flex sm:hidden overflow-x-auto snap-x snap-mandatory gap-3.5 -mx-4 px-4 pb-2 pt-1 no-scrollbar scroll-smooth"
+          >
+            {packages.map((p) => (
+              <div key={p.name} data-pkg-card className="w-[85vw] max-w-[340px] shrink-0 snap-center">
+                <PackageCard pkg={p} />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Pagination Dots (< sm screens) */}
+          <div className="flex sm:hidden items-center justify-center gap-2 mt-4">
+            {packages.map((p, idx) => (
+              <button
+                key={p.name}
+                type="button"
+                onClick={() => scrollToPackage(idx)}
+                aria-label={`Select ${p.name} package`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activePkg === idx ? "w-6 bg-gold" : "w-1.5 bg-border hover:bg-gold/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Desktop & Tablet Grid (>= sm screens) */}
+          <div className="mt-10 hidden sm:grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {packages.map((p, i) => (
-              <Reveal key={p.name} delay={(i % 4) * 60}>
+              <Reveal key={p.name} delay={(i % 4) * 60} className="h-full">
                 <PackageCard pkg={p} />
               </Reveal>
             ))}
@@ -377,14 +538,15 @@ export function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16 lg:py-24">
         <SectionHeading
           eyebrowTe="ఎలా పని చేస్తుంది"
           title="From Your Plan To The Perfect Feast"
+          intro="Four simple steps from your first enquiry to a memorable meal served with care."
         />
-        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-8 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6">
           {steps.map((s, i) => (
-            <Reveal as="li" key={s.index} delay={(i % 4) * 60} className="list-none">
+            <Reveal as="li" key={s.index} delay={(i % 4) * 60} className="list-none h-full">
               <ProcessStep {...s} />
             </Reveal>
           ))}
@@ -411,15 +573,45 @@ export function Home() {
 
       {/* TESTIMONIALS */}
       {site.showTestimonials && (
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+        <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16 lg:py-24">
           <SectionHeading
             eyebrowTe="విందు బాగుంటే... వేడుక గుర్తుండాలి"
             title="What Our Guests Say"
-            intro="Real customer reviews will appear here. The cards below are clearly marked placeholders."
+            intro="Memorable celebrations remembered for traditional taste, flawless service, and satisfied guests across Visakhapatnam."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+          {/* Mobile Snap Carousel (< sm screens) */}
+          <div
+            ref={testimonialScrollRef}
+            onScroll={handleTestimonialScroll}
+            className="mt-6 flex sm:hidden overflow-x-auto snap-x snap-mandatory gap-3.5 -mx-4 px-4 pb-2 pt-1 no-scrollbar scroll-smooth"
+          >
             {testimonials.map((t, i) => (
-              <Reveal key={i} delay={(i % 3) * 60}>
+              <div key={i} data-testimonial-card className="w-[86vw] max-w-[340px] shrink-0 snap-center">
+                <TestimonialCard t={t} />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Pagination Dots (< sm screens) */}
+          <div className="flex sm:hidden items-center justify-center gap-2 mt-4">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollToTestimonial(idx)}
+                aria-label={`Go to testimonial ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeTestimonial === idx ? "w-6 bg-gold" : "w-1.5 bg-border hover:bg-gold/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Desktop & Tablet Grid (>= sm screens) */}
+          <div className="mt-10 hidden sm:grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t, i) => (
+              <Reveal key={i} delay={(i % 3) * 60} className="h-full">
                 <TestimonialCard t={t} />
               </Reveal>
             ))}

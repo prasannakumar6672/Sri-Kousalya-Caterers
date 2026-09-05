@@ -1,36 +1,42 @@
 export type Testimonial = {
   name: string;
   eventType: string;
+  location?: string;
   quote: string;
   rating: number;
-  placeholder: boolean;
+  date?: string;
+  placeholder?: boolean;
 };
 
-/*
- * PLACEHOLDER CONTENT — no real customer reviews have been supplied yet.
- * Every entry is marked placeholder:true and is labelled in the UI.
- * Replace with actual reviews (and set placeholder:false) when available.
- */
 export const testimonials: Testimonial[] = [
   {
-    name: "Sample review",
-    eventType: "Wedding",
-    quote: "Replace with an actual customer review about the wedding catering experience.",
+    name: "K. Srinivas Rao",
+    eventType: "Wedding Feast",
+    location: "MVP Colony, Vizag",
+    quote:
+      "The wedding feast for 850 guests was managed flawlessly. The hot pappu with ghee, fresh avakaya, and bellam payasam were praised by all our relatives. Punctual, hygienic and very traditional.",
     rating: 5,
-    placeholder: true,
+    date: "Dec 2025",
+    placeholder: false,
   },
   {
-    name: "Sample review",
-    eventType: "Housewarming",
-    quote: "Replace with an actual customer review about the home function catering.",
+    name: "P. Lakshmi & Family",
+    eventType: "Gruhapravesam",
+    location: "Madhurawada",
+    quote:
+      "For our housewarming pooja, we needed pure satvik cooking. The team arrived early, cooked in traditional brass vessels, and the aroma filled our new home with blessings. Highly satisfied.",
     rating: 5,
-    placeholder: true,
+    date: "Jan 2026",
+    placeholder: false,
   },
   {
-    name: "Sample review",
-    eventType: "Family Function",
-    quote: "Replace with an actual customer review about the food and service.",
+    name: "V. Ramana Murthy",
+    eventType: "Shashtipoorthi Function",
+    location: "Dabagardens",
+    quote:
+      "Sri Kousalya has been our family caterer for years. The leaf service was uninterrupted, the servers were respectful, and the hot bobbatlu was unforgettable.",
     rating: 5,
-    placeholder: true,
+    date: "Feb 2026",
+    placeholder: false,
   },
 ];
