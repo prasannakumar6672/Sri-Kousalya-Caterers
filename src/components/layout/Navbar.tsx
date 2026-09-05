@@ -34,7 +34,7 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 min-w-[1280px] transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           isTransparent
             ? "border-b border-transparent bg-transparent shadow-none"
             : "border-b border-border/70 bg-[#fdfbf7]/95 shadow-sm backdrop-blur"
