@@ -82,7 +82,7 @@ export function Home() {
           title="Catering For Every Occasion"
           intro="From an intimate house pooja to a thousand-guest wedding, the food is prepared the same way — fresh, traditional and served with care."
         />
-        <ul className="no-scrollbar mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <ul className="no-scrollbar mt-10 grid grid-cols-1 min-[440px]:grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {occasions.map((o, i) => (
             <Reveal as="li" key={o.title} delay={(i % 4) * 60}>
               <OccasionCard occasion={o} />

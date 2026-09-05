@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { images } from "@/data/images";
 import { ArrowDown } from "lucide-react";
 
@@ -22,7 +23,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] flex-col justify-start overflow-hidden bg-brand-charcoal pt-[100px] lg:min-h-[95vh] lg:pt-[100px]"
+      className="relative flex min-h-[100svh] flex-col justify-start overflow-hidden bg-brand-charcoal pt-[76px] sm:pt-[90px] lg:min-h-[95vh] lg:pt-[100px]"
     >
       {/* Background Image & Overlays */}
       <div className="absolute inset-0 z-0 bg-[#222825]">
@@ -64,18 +65,18 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 lg:px-8 lg:pb-32">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-32">
         <div className="flex w-full flex-col items-start justify-center">
           {/* FULL WIDTH ORNAMENTAL ROW */}
           <motion.div
-            className="mb-6 flex w-full items-center justify-center gap-6 sm:gap-4 lg:mb-10"
+            className="mb-6 flex w-full items-center justify-center gap-2 sm:gap-4 lg:mb-10"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
             {/* Left Repeating Elements */}
-            <div className="flex flex-grow items-center justify-end gap-2 opacity-90 sm:gap-6">
-              <div className="h-[1px] w-full max-w-[300px] bg-gradient-to-r from-transparent via-brand-gold/60 to-brand-gold"></div>
+            <div className="flex flex-grow items-center justify-end gap-1.5 opacity-90 sm:gap-4 md:gap-6">
+              <div className="h-[1px] w-full max-w-[80px] bg-gradient-to-r from-transparent via-brand-gold/60 to-brand-gold sm:max-w-[180px] md:max-w-[300px]"></div>
               <svg
                 viewBox="0 0 24 24"
                 className="hidden h-5 w-5 flex-shrink-0 text-brand-gold drop-shadow-sm sm:h-6 sm:w-6 md:block"
@@ -130,7 +131,7 @@ export function Hero() {
             </div>
 
             {/* Right Repeating Elements */}
-            <div className="flex flex-grow items-center justify-start gap-2 opacity-90 sm:gap-6">
+            <div className="flex flex-grow items-center justify-start gap-1.5 opacity-90 sm:gap-4 md:gap-6">
               <svg
                 viewBox="0 0 24 24"
                 className="h-5 w-5 flex-shrink-0 text-brand-gold drop-shadow-sm sm:h-6 sm:w-6"
@@ -166,7 +167,7 @@ export function Hero() {
                 <path d="M3 13 C3 18, 8 21, 12 21 C16 21, 21 18, 21 13 Z" fill="currentColor" />
                 <path d="M3 13 L21 13" stroke="#222825" strokeWidth="1" />
               </svg>
-              <div className="h-[1px] w-full max-w-[300px] bg-gradient-to-l from-transparent via-brand-gold/60 to-brand-gold"></div>
+              <div className="h-[1px] w-full max-w-[80px] bg-gradient-to-l from-transparent via-brand-gold/60 to-brand-gold sm:max-w-[180px] md:max-w-[300px]"></div>
             </div>
           </motion.div>
 
@@ -198,7 +199,7 @@ export function Hero() {
             {/* Headline */}
             <motion.h1
               variants={itemVariants}
-              className="font-display mb-10 text-3xl font-bold leading-[1.15] text-white drop-shadow-md sm:text-4xl md:text-5xl lg:text-6xl"
+              className="font-display mb-6 text-2xl font-bold leading-[1.15] text-white drop-shadow-md sm:mb-8 sm:text-4xl md:text-5xl lg:mb-10 lg:text-6xl"
             >
               Where Our Culinary <br className="hidden sm:block" /> Journey Began
             </motion.h1>
@@ -208,7 +209,7 @@ export function Hero() {
               variants={itemVariants}
               className="mb-6 flex w-full flex-col items-center lg:items-start"
             >
-              <div className="relative flex aspect-square w-full max-w-[260px] items-center justify-center overflow-hidden rounded-full border border-brand-gold/30 bg-white p-2 shadow-[0_10px_40px_rgba(0,0,0,0.5)] sm:max-w-[320px] sm:p-4 md:max-w-[380px]">
+              <div className="relative flex aspect-square w-full max-w-[210px] items-center justify-center overflow-hidden rounded-full border border-brand-gold/30 bg-white p-2 shadow-[0_10px_40px_rgba(0,0,0,0.5)] sm:max-w-[280px] sm:p-4 md:max-w-[340px] lg:max-w-[380px]">
                 <img
                   src={images.brandLogoTransparent || images.brandLogo}
                   alt="Sri Kousalya Catering & Cooking Services"
@@ -220,7 +221,7 @@ export function Hero() {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="mx-auto mb-8 max-w-md text-sm font-light leading-relaxed text-white/90 drop-shadow-sm sm:text-base lg:mx-0"
+              className="mx-auto mb-6 max-w-md text-sm font-light leading-relaxed text-white/90 drop-shadow-sm sm:mb-8 sm:text-base lg:mx-0"
             >
               Rooted in the culinary traditions of Indupalli, Krishna District, and serving
               celebrations in Visakhapatnam.
@@ -229,7 +230,7 @@ export function Hero() {
             {/* Current Location Indicator */}
             <motion.div
               variants={itemVariants}
-              className="mb-12 flex w-full items-center justify-center gap-3 text-white/80 lg:justify-start"
+              className="mb-8 flex w-full items-center justify-center gap-3 text-white/80 sm:mb-12 lg:justify-start"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-brand-gold-light shadow-[0_0_8px_rgba(232,205,130,0.6)]"></span>
               <span className="text-[10px] font-medium tracking-[0.15em] uppercase sm:text-xs">
@@ -240,20 +241,20 @@ export function Hero() {
             {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row lg:justify-start"
+              className="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-4 lg:justify-start"
             >
-              <a
-                href="/quote"
+              <Link
+                to="/quote"
                 className="w-full rounded-sm border border-brand-gold bg-brand-green-dark px-8 py-3.5 text-center text-sm font-medium text-brand-cream shadow-md transition-all duration-300 hover:border-brand-gold-light sm:w-auto"
               >
                 Plan Your Function
-              </a>
-              <a
-                href="/menu"
+              </Link>
+              <Link
+                to="/menu"
                 className="w-full rounded-sm border border-brand-gold-light bg-brand-cream px-8 py-3.5 text-center text-sm font-medium text-brand-green-dark shadow-md transition-all duration-300 hover:bg-brand-cream/90 sm:w-auto"
               >
                 Explore Our Food
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
