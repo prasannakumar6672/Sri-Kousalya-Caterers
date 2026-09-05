@@ -25,11 +25,23 @@ export function useLang() {
   return useContext(LanguageContext);
 }
 
-export function LanguageToggle({ className = "" }: { className?: string }) {
+export function LanguageToggle({
+  className = "",
+  tone = "dark",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
   const { lang, setLang } = useLang();
+  const isLight = tone === "light";
+
   return (
     <div
-      className={`inline-flex shrink-0 items-center rounded-full border border-gold/40 bg-card/70 p-0.5 text-xs ${className}`}
+      className={`inline-flex shrink-0 items-center rounded-full border p-0.5 text-xs transition-colors ${
+        isLight
+          ? "border-brand-gold/50 bg-black/30 backdrop-blur-sm"
+          : "border-gold/40 bg-card/70"
+      } ${className}`}
       role="group"
       aria-label="Language"
     >
@@ -38,7 +50,11 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}
         className={`rounded-full px-2.5 py-1 font-semibold transition-colors ${
-          lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+          lang === "en"
+            ? "bg-primary text-primary-foreground"
+            : isLight
+            ? "text-white/80 hover:text-white"
+            : "text-muted-foreground hover:text-foreground"
         }`}
       >
         EN
@@ -48,7 +64,11 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
         onClick={() => setLang("te")}
         aria-pressed={lang === "te"}
         className={`te rounded-full px-2.5 py-1 transition-colors ${
-          lang === "te" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+          lang === "te"
+            ? "bg-primary text-primary-foreground"
+            : isLight
+            ? "text-white/80 hover:text-white"
+            : "text-muted-foreground hover:text-foreground"
         }`}
       >
         తెలుగు

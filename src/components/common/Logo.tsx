@@ -9,8 +9,8 @@ export function Logo({
   tone?: "dark" | "light";
   className?: string;
 }) {
-  const main = tone === "light" ? "text-primary-foreground" : "text-primary";
-  const sub = tone === "light" ? "text-gold-soft" : "text-muted-foreground";
+  const main = tone === "light" ? "text-white" : "text-primary";
+  const sub = tone === "light" ? "text-brand-gold-light" : "text-muted-foreground";
 
   return (
     <Link

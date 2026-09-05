@@ -25,31 +25,40 @@ function ScrollToTop() {
   return null;
 }
 
+function AppLayout() {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Navbar />
+      <main className={`flex-1 ${isHome ? "" : "pt-[64px] sm:pt-[76px]"}`}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/packages" element={<Packages />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/quote" element={<Quote />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Footer />
+      {/* Clears the fixed mobile action bar */}
+      <div className="h-[68px] lg:hidden" aria-hidden="true" />
+      <MobileBottomBar />
+    </div>
+  );
+}
+
 export function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <LanguageProvider>
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/packages" element={<Packages />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/quote" element={<Quote />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-          {/* Clears the fixed mobile action bar */}
-          <div className="h-[68px] lg:hidden" aria-hidden="true" />
-          <MobileBottomBar />
-        </div>
+        <AppLayout />
       </LanguageProvider>
     </BrowserRouter>
   );
