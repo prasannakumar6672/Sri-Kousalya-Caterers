@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { btnPrimary } from "@/components/common/buttons";
-import { LanguageToggle } from "@/lib/language";
 import { nav, primaryPhone } from "@/data/siteData";
 
 export function Navbar() {
@@ -65,7 +64,6 @@ export function Navbar() {
                 {item.label}
               </NavLink>
             ))}
-            <LanguageToggle tone={isTransparent ? "light" : "dark"} />
             <Link
               to="/quote"
               className={
@@ -79,7 +77,6 @@ export function Navbar() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
-            <LanguageToggle tone={isTransparent ? "light" : "dark"} />
             <a
               href={`tel:${primaryPhone.tel}`}
               aria-label={`Call ${primaryPhone.display}`}

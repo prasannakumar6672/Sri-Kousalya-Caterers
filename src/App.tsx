@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { LanguageProvider } from "@/lib/language";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
 
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
@@ -46,9 +45,6 @@ function AppLayout() {
         </Routes>
       </main>
       <Footer />
-      {/* Clears the fixed mobile action bar */}
-      <div className="h-[68px] lg:hidden" aria-hidden="true" />
-      <MobileBottomBar />
     </div>
   );
 }
