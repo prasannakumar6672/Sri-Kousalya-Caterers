@@ -108,7 +108,7 @@ export function Navbar() {
       {open && (
         <div className="fixed inset-0 z-50 flex flex-col bg-[#fdfbf7] lg:hidden">
           <div className="flex items-center justify-between px-4 py-3 sm:px-6">
-            <Logo />
+            <Logo onClick={() => setOpen(false)} />
             <button
               type="button"
               onClick={() => setOpen(false)}

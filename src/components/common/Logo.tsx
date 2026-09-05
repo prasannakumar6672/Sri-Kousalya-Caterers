@@ -5,17 +5,25 @@ import swamiIcon from "@/assets/hero/swami-icon.png";
 export function Logo({
   tone = "dark",
   className = "",
+  onClick,
 }: {
   tone?: "dark" | "light";
   className?: string;
+  onClick?: () => void;
 }) {
   const main = tone === "light" ? "text-white" : "text-primary";
   const sub = tone === "light" ? "text-brand-gold-light" : "text-muted-foreground";
 
+  const handleClick = () => {
+    onClick?.();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Link
       to="/"
-      className={`group inline-flex min-w-0 items-center gap-2 sm:gap-2.5 leading-none ${className}`}
+      onClick={handleClick}
+      className={`group inline-flex min-w-0 items-center gap-2 sm:gap-2.5 leading-none cursor-pointer ${className}`}
       aria-label={`${site.name} — ${site.tagline}, home`}
     >
       {/* Lord Venkateswara Swami Temple Arch Icon */}
