@@ -89,7 +89,7 @@ export function LoadingScreen() {
       role="status"
       aria-live="polite"
       aria-label="Loading Sri Kousalya Catering & Cooking Services"
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#082015] via-[#0c2e1f] to-[#082015] px-6 text-center select-none transition-all duration-700 ease-out ${
+      className={`fixed inset-0 z-[100] min-w-[1280px] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#082015] via-[#0c2e1f] to-[#082015] px-6 text-center select-none transition-all duration-700 ease-out ${
         isExiting
           ? "opacity-0 -translate-y-4 scale-[1.02] pointer-events-none"
           : "opacity-100 translate-y-0 scale-100"

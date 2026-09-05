@@ -102,13 +102,20 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    min-width: 1280px;
   }
 
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    overflow-x: hidden;
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  #root {
+    min-width: 1280px;
+    width: 100%;
   }
 
   h1,
