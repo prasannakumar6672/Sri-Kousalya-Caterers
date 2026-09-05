@@ -146,7 +146,6 @@ export function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <SectionHeading
           eyebrowTe="ప్రతి వేడుకకు"
-          eyebrow="Occasions"
           title="Catering For Every Occasion"
           intro="From an intimate house pooja to a thousand-guest wedding, the food is prepared the same way — fresh, traditional and served with care."
         />
@@ -213,7 +212,6 @@ export function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <SectionHeading
           eyebrowTe="రుచుల పండుగ"
-          eyebrow="Signature"
           title="Signature Andhra Flavours"
           intro="A glimpse of the dishes an Andhra feast is built around. Sample items shown — your final menu is planned with you."
         />
@@ -343,7 +341,6 @@ export function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <SectionHeading
           eyebrowTe="మా సేవలు"
-          eyebrow="Services"
           title="What We Take Care Of"
           intro="Cooking only, full catering, or anything in between — tell us how much you'd like handled."
         />
@@ -366,7 +363,6 @@ export function Home() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <SectionHeading
             eyebrowTe="విందు ప్యాకేజీలు"
-            eyebrow="Packages"
             title="Catering Packages"
             intro="Every event is quoted after we understand the guest count, menu and service style — so you only pay for what your celebration needs."
           />
@@ -384,7 +380,6 @@ export function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
         <SectionHeading
           eyebrowTe="ఎలా పని చేస్తుంది"
-          eyebrow="Process"
           title="From Your Plan To The Perfect Feast"
         />
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -401,7 +396,6 @@ export function Home() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <SectionHeading
             eyebrowTe="మా జ్ఞాపకాలు"
-            eyebrow="Gallery"
             title="Food, Feasts & Functions"
           />
           <div className="mt-10">
@@ -420,7 +414,6 @@ export function Home() {
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <SectionHeading
             eyebrowTe="విందు బాగుంటే... వేడుక గుర్తుండాలి"
-            eyebrow="Reviews"
             title="What Our Guests Say"
             intro="Real customer reviews will appear here. The cards below are clearly marked placeholders."
           />

@@ -22,10 +22,9 @@ export function SectionHeading({
   const introColor = tone === "light" ? "text-primary-foreground/75" : "text-muted-foreground";
   return (
     <Reveal className={`flex max-w-2xl flex-col ${alignment}`}>
-      {(eyebrowTe || eyebrow) && (
-        <p className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
-          {eyebrowTe && <span className="te text-sm text-gold">{eyebrowTe}</span>}
-          {eyebrow && <span className="eyebrow text-muted-foreground">{eyebrow}</span>}
+      {eyebrowTe && (
+        <p className={`mb-3 ${align === "center" ? "text-center justify-center mx-auto" : "text-left"} flex items-center`}>
+          <span className="te text-sm sm:text-base font-medium text-gold">{eyebrowTe}</span>
         </p>
       )}
       <h2 className={`text-[1.9rem] leading-[1.15] sm:text-4xl lg:text-[2.7rem] ${titleColor}`}>
