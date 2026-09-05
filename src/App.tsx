@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { LanguageProvider } from "@/lib/language";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { LoadingScreen } from "@/components/common/LoadingScreen";
 
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
@@ -30,6 +31,7 @@ function AppLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <LoadingScreen />
       <Navbar />
       <main className={`flex-1 ${isHome ? "" : "pt-[64px] sm:pt-[76px]"}`}>
         <Routes>
