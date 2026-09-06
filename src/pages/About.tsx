@@ -3,7 +3,7 @@ import cookingTeam from "@/assets/cooking-team.jpg";
 import leafService from "@/assets/gallery-leaf-service.jpg";
 import heroFeast from "@/assets/hero-feast.jpg";
 import founderImage from "@/assets/founder.png";
-import proprietorImage from "@/assets/proprietor.png";
+import proprietorImage from "@/assets/proprietor.jpeg";
 import { PageHero } from "@/components/sections/PageHero";
 import { Reveal } from "@/components/common/Reveal";
 import { MangoLeafDivider } from "@/components/common/Motif";
