@@ -23,9 +23,6 @@ export function OccasionCard({ occasion }: { occasion: Occasion }) {
         {occasion.title}
       </h3>
       <p className="te mt-0.5 sm:mt-1 text-[11px] sm:text-xs lg:text-sm font-medium text-gold">{occasion.te}</p>
-      <p className="mt-1.5 sm:mt-2.5 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-2 sm:line-clamp-3">
-        {occasion.description}
-      </p>
     </article>
   );
 }
